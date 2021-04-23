@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+
 def canUnlockAll(boxes):
     """
     You have n number of locked boxes in front of you.
