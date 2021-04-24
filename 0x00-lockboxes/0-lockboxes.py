@@ -1,19 +1,29 @@
 #!/usr/bin/python3
+"""
+    Determine wether all boxes can be unlocked by other boxes' values
+    @boxes: 2d array of boxes with values inside them
+    Returns: True or False
+"""
 
 
 def canUnlockAll(boxes):
-    """
-    You have n number of locked boxes in front of you.
-    Each box is numbered sequentially from 0 to n - 1
-    and each box may contain keys to the other boxes.
-    """
-    keys = [0]
-    for b in keys:
-        for key in boxes[b]:
-            if key not in keys:
-                if key < len(boxes):
-                    keys.append(key)
+    stack = [0]
+    unlocked = [1] + [0] * (len(boxes) - 1)
+    i = 0
 
-    if len(keys) == len(boxes):
+    if len(boxes) == 0:
         return True
-    return False
+    if not isinstance(boxes, list):
+        return False
+    while stack:
+        p = stack.pop()
+        for key in boxes[p]:
+            if key > 0 and key < len(boxes) and unlocked[key] == 0:
+                unlocked[key] = 1
+                stack.append(key)
+        i = i + 1
+
+    if 0 in unlocked:
+        return False
+    else:
+        return True
