@@ -7,7 +7,7 @@ request('https://swapi-api.hbtn.io/api/films/' + process.argv[2], function (err,
   sameOrder(ch, 0);
 });
 const sameOrder = (ch, x) => {
-  if (x === ch.length) return;
+  if (ch.length === x) return;
   request(ch[x], function (err, res, body) {
     if (err) throw err;
     console.log(JSON.parse(body).name);
